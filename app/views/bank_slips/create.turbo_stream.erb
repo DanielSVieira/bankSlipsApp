@@ -1,0 +1,13 @@
+<%# 1. Add the new row %>
+<turbo-stream action="prepend" target="bank-slips-list">
+  <template>
+    <%= render partial: "bank_slips/bank_slip", locals: { bank_slip: @bank_slip }, formats: [:html] %>
+  </template>
+</turbo-stream>
+
+<%# 2. Replace the old form with a fresh one using the partial %>
+<turbo-stream action="replace" target="new_bank_slip_form">
+  <template>
+    <%= render partial: "form", locals: { bank_slip: BankSlip.new }, formats: [:html] %>
+  </template>
+</turbo-stream>

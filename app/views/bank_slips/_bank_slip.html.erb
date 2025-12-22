@@ -1,0 +1,40 @@
+<%# app/views/bank_slips/_bank_slip.html.erb %>
+<tr id="<%= dom_id(bank_slip) %>" class="hover:bg-gray-50 transition duration-150 border-b border-gray-200">
+  <td class="px-5 py-5 text-sm font-medium text-gray-900">
+    <%= bank_slip.customer %>
+  </td>
+  <td class="px-5 py-5 text-sm text-gray-600">
+    <%= bank_slip.due_date %>
+  </td>
+  <td class="px-5 py-5 text-sm text-gray-600 font-mono">
+    $<%= number_with_precision(bank_slip.total_in_cents / 100.0, precision: 2) %>
+  </td>
+   <td class="px-5 py-5 text-sm">
+    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium 
+      <%= 'bg-yellow-100 text-yellow-800' if bank_slip.pending? %>
+      <%= 'bg-green-100 text-green-800' if bank_slip.paid? %>
+      <%= 'bg-red-100 text-red-800' if bank_slip.canceled? %>">
+      <%= bank_slip.status.capitalize %>
+    </span>
+  </td> 
+  <td class="px-5 py-5 text-sm text-gray-600 font-mono">
+    <%= bank_slip.external_id %>
+  </td>
+  <td class="px-5 py-5 text-sm text-right">
+    <% if bank_slip.pending? %>
+      <div class="inline-flex items-center space-x-2">
+        <%# Pay Button %>
+        <%= button_to "Pay", pay_bank_slip_path(bank_slip), 
+            method: :patch, 
+            class: "inline-flex items-center px-3 py-1 border border-transparent text-xs font-bold rounded shadow-sm text-black cursor: pointer; bg-green-600 hover:bg-green-700 focus:outline-none transition" %>
+            
+        <%# Cancel Button %>
+        <%= button_to "Cancel", cancel_bank_slip_path(bank_slip), 
+            method: :patch, 
+            class: "inline-flex items-center px-3 py-1 border border-red-300 text-xs font-bold rounded text-red-700 bg-white hover:bg-red-50 focus:outline-none transition",
+            data: { turbo_confirm: "Are you sure you want to cancel this slip?" } %>
+      </div>
+    <% else %>
+      <span class="text-xs text-gray-400 italic">No actions available</span>
+    <% end %>
+</tr>

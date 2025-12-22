@@ -1,0 +1,28 @@
+    <%# app/views/bank_slips/index.html.erb %>
+    <div class="container mx-auto p-6">
+    <h1 class="text-3xl font-bold mb-6 text-gray-800">Bank Slips Management</h1>
+    
+    <div class="bg-gray-50 p-6 rounded-lg mb-8 border border-gray-200 shadow-sm">
+        <h2 class="text-lg font-semibold mb-4 text-gray-700">Create New Bank Slip</h2>
+        <%= render partial: "form", locals: { bank_slip: @bank_slip } %>
+    </div>
+
+    <div class="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200">
+        <table class="min-w-full leading-normal">
+        <thead>
+            <tr class="bg-gray-100 border-b-2 border-gray-200">
+            <th class="px-5 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Customer</th>
+            <th class="px-5 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Due Date</th>
+            <th class="px-5 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Amount</th>
+            <th class="px-5 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Status</th>
+            <th class="px-5 py-3 text-left text-xs font-semibold text-gray-600 uppercase">External ID</th>
+            <th class="px-5 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Actions</th>
+            </tr>
+        </thead>
+        <tbody id="bank-slips-list">
+            <%# This renders app/views/bank_slips/_bank_slip.html.erb for each slip %>
+            <%= render @bank_slips %>
+        </tbody>
+        </table>
+    </div>
+    </div>
