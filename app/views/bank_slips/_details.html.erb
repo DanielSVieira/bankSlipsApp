@@ -1,0 +1,16 @@
+  <% if bank_slip.pending? %>
+    <p><strong>Customer:</strong> <%= bank_slip.customer %></p>
+    <p><strong>Due date:</strong> <%= bank_slip.due_date %></p>
+    <p><strong>Value:</strong> $<%= number_with_precision(bank_slip.total_in_cents / 100.0, precision: 2) %></p>
+    <p><strong>Status:</strong> <%= bank_slip.status.capitalize %></p>
+    <p><strong>Fine:</strong> $<%= number_with_precision(fine, precision: 2) %></p>
+  <% elsif bank_slip.paid? %>
+    <p><strong>Customer:</strong> <%= bank_slip.customer %></p>
+    <p><strong>Value:</strong> $<%= number_with_precision(bank_slip.total_in_cents / 100.0, precision: 2) %></p>
+    <p><strong>Status:</strong> <%= bank_slip.status.capitalize %></p>
+    <p><strong>Paid at:</strong> <%= bank_slip.paid_at %></p>
+  <% elsif bank_slip.canceled? %>
+    <p><strong>Customer:</strong> <%= bank_slip.customer %></p>
+    <p><strong>Value:</strong> $<%= number_with_precision(bank_slip.total_in_cents / 100.0, precision: 2) %></p>
+    <p><strong>Status:</strong> <%= bank_slip.status.capitalize %></p>
+  <% end %>

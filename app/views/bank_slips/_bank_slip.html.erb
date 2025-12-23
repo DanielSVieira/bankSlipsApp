@@ -1,5 +1,7 @@
 <%# app/views/bank_slips/_bank_slip.html.erb %>
-<tr id="<%= dom_id(bank_slip) %>" class="hover:bg-gray-50 transition duration-150 border-b border-gray-200">
+<% domid = dom_id(bank_slip) %>
+<tr id="<%= domid %>" class="hover:bg-gray-50 transition duration-150 border-b border-gray-200"
+  data-bank-slip-id="<%= bank_slip.id %>">
   <td class="px-5 py-5 text-sm font-medium text-gray-900">
     <%= bank_slip.customer %>
   </td>
@@ -37,4 +39,11 @@
     <% else %>
       <span class="text-xs text-gray-400 italic">No actions available</span>
     <% end %>
+</tr>
+<tr id="details_<%= bank_slip.id %>" class="hidden bg-gray-50">
+  <td colspan="6" class="px-5 py-5 text-sm text-gray-700">
+    <div id="details_content_<%= bank_slip.id %>">
+      Loading...
+    </div>
+  </td>
 </tr>

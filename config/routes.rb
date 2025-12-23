@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     member do
       patch :pay
       patch :cancel
+      get :details
     end
   end
   # Defines the root path route ("/")

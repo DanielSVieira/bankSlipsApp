@@ -8,6 +8,9 @@ Bundler.require(*Rails.groups)
 
 module BankSlipsApp
   class Application < Rails::Application
+    # Enable serving of static files from public/
+    config.public_file_server.enabled = true
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 8.1
 
@@ -23,5 +26,7 @@ module BankSlipsApp
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    config.importmap.serve_from_assets = false
   end
 end

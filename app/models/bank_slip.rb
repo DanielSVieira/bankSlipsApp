@@ -20,7 +20,7 @@ class BankSlip < ApplicationRecord
   def transition_to_paid!
     raise "Only pending slips can be paid" unless pending?
 
-    update!(status: :paid)
+    update!(status: :paid, paid_at: Time.current)
   rescue ActiveRecord::StaleObjectError
     errors.add(:base, "This record was updated by another user. Please refresh the page.")
     false
