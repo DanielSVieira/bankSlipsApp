@@ -1,22 +1,22 @@
 # app/dtos/exchange_rate_dto.rb
 class ExchangeRateDTO
-  attr_reader :rate
+  attr_reader :from, :rates
 
-  attr_reader :brl_rate
-
-  # data: parsed JSON with symbolized keys
   def initialize(data)
-    # Find the rate to BRL
-    brl = data[:rates].find { |r| r[:to] == "BRL" }
-    @brl_rate = brl ? brl[:rate] : 0
+    @from = data[:from]
+    @rates = data[:rates] || []
   end
 
-  # simple accessor
+  def rate_for(to_currency)
+    rate_entry = @rates.find { |r| r[:to] == to_currency }
+    rate_entry ? rate_entry[:rate] : 0
+  end
+
   def rate
-    brl_rate
+    rate_for("BRL")
   end
 
   def amount
-    @rate
+    rate
   end
 end

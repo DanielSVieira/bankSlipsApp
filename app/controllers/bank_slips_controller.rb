@@ -1,6 +1,4 @@
 # app/controllers/bank_slips_controller.rb
-require_relative "../dtos/exchange_rate_dto"
-
 class BankSlipsController < ApplicationController
   def base_url
     ExchangeRateService::DEFAULT_BASE_URL
