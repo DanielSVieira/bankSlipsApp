@@ -2,24 +2,27 @@ import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
   connect() {
-    console.log("BankSlipController connected!");
-
     // Scope to this controller, not the whole document
     this.rows = this.element.querySelectorAll("tr[data-bank-slip-id]");
 
     this.rows.forEach((row) => {
-      row.addEventListener("click", () => this.toggleDetails(row));
+      row.addEventListener("click", (event) => this.toggleDetails(event, row));
     });
   }
 
-  toggleDetails(row) {
-    const id = row.dataset.bankSlipId; // <-- numeric ID, e.g. "42"
+  stop(event) {
+    event.stopPropagation();
+  }
 
-    const detailsRow = document.getElementById(`details_${id}`);
-    if (!detailsRow) {
-      console.log("Details row not found for id:", id);
+  toggleDetails(event, row) {
+    // Prevent toggling if clicking on buttons or forms
+    if (event.target.closest("button") || event.target.closest("form")) {
       return;
     }
+
+    const id = row.dataset.bankSlipId;
+    const detailsRow = document.getElementById(`details_${id}`);
+    if (!detailsRow) return;
 
     detailsRow.classList.toggle("hidden");
 
@@ -28,16 +31,10 @@ export default class extends Controller {
 
     if (contentDiv.innerHTML.trim() === "Loading...") {
       fetch(`/bank_slips/${id}/details`)
-        .then((res) => {
-          if (!res.ok) throw new Error("Network response was not ok");
-          return res.text();
-        })
-        .then((html) => {
-          contentDiv.innerHTML = html;
-        })
-        .catch((err) => {
+        .then((res) => res.text())
+        .then((html) => (contentDiv.innerHTML = html))
+        .catch(() => {
           contentDiv.innerHTML = `<span class="text-red-500">Failed to load details.</span>`;
-          console.error(err);
         });
     }
   }
