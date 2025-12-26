@@ -1,5 +1,7 @@
 source "https://rubygems.org"
 
+ruby "3.4.8"
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 8.1.1"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
@@ -69,22 +71,20 @@ group :development, :test do
 
   # Use Minitest for tests
   gem "minitest", "~> 5.0" # Force version 5 instead of 6
+
+  gem "rspec-rails"
+  gem "factory_bot_rails"
+  gem "faker"
 end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
-  gem "rspec-rails"
-  gem "factory_bot_rails"
-  gem "faker"
 end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
-  gem "rspec-rails"
-  gem "factory_bot_rails"
-  gem "faker"
   gem "webmock"
 end

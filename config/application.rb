@@ -1,6 +1,6 @@
 require_relative "boot"
 
-require 'multipart/post'
+require "multipart/post"
 
 require "rails/all"
 
