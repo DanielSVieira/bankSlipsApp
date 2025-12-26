@@ -70,7 +70,7 @@ group :development, :test do
   gem "pagy"
 
   # Use Minitest for tests
-  gem "minitest", "~> 5.0" # Force version 5 instead of 6
+  gem "minitest", "~> 6.0" # Force version 5 instead of 6
 
   gem "rspec-rails"
   gem "factory_bot_rails"
