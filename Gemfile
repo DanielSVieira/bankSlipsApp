@@ -88,3 +88,7 @@ group :test do
   gem "selenium-webdriver"
   gem "webmock"
 end
+
+group :development, :test do
+  gem "rubocop", require: false
+end
