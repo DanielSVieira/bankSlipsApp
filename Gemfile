@@ -45,7 +45,7 @@ gem "thruster", require: false
 gem "image_processing", "~> 1.2"
 
 # needed o invoke the external service to fetch exchange rates
-gem "faraday", "~> 1.0"
+gem "faraday", "~> 1.10"
 
 # middleware for Faraday to handle JSON responses
 gem "faraday_middleware", "~> 1.2"
